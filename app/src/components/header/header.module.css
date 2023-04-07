@@ -2,10 +2,12 @@
     padding: 20px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--back-color);
     justify-items: center;
     animation: previewText 3s;
     color: var(--back-color);
+    text-transform: uppercase;
+    animation: previewText 3s;
 }
 .logo {
     margin-right: auto;
@@ -32,9 +34,13 @@
     content: '';
     width: 100%;
     height: 1px;
-    background: white;
+    background: var(--back-color);
     position: absolute;
     left: 0; bottom: -5px;
     transform: scaleX(0);
     transition: transform .25s;
+}
+@keyframes previewText {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }

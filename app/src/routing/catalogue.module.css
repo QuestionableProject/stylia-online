@@ -3,23 +3,45 @@
     gap: 50px;
     grid-template-columns: minmax(200px,300px) 1fr;
     height: 100%;
-    padding: 0 50px;
+    text-transform: uppercase;
 }
 .category li {
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid var(--back-color);
     border-bottom: none;
     cursor: pointer;
     transition: transform .5s;
 }
-.category li:hover {
-    transform: scaleY(1.1);
-}
 .category li:last-child {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--back-color);
 }
-
-.catalogue__block {
+.catalogue__filter {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+.catalogue__filter li {
+    position: relative;
+    cursor: pointer;
+}
+.catalogue__filter li:hover::before {
+    transform: scaleX(1);
+    transition: transform 1s;
+}
+.catalogue__filter li::before{
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: var(--back-color);
+    position: absolute;
+    left: 0; bottom: -5px;
+    transform: scaleX(0);
+    transition: transform .25s;
+}
+.catalogue__cardlist {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
 }

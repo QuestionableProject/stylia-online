@@ -7,6 +7,7 @@
     background: var(--back-color);
     text-transform: uppercase;
     color: white;
+    margin: 0 -50px;
 }
 .footer h1 {
     text-align: center;

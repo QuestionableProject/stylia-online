@@ -9,6 +9,7 @@ import styles from './catalogue.module.css'
 
 
 export const Catalogue = () => {
+
     return (
         <Layout>
             <Header />
@@ -24,13 +25,20 @@ export const Catalogue = () => {
                         <li>Игровые столы</li>
                     </ul>
                     <div className={styles.catalogue__block}>
-                        {product.map((e) => 
-                            <CatalogueCard data={e}/>
-                        )}
+                        <ul className={styles.catalogue__filter}>
+                            <li>По популярности</li>
+                            <li>Сначала дешевое</li>
+                            <li>Сначала дорогое</li>
+                        </ul>
+                        <div className={styles.catalogue__cardlist}>
+                            {product.map((e) =>
+                                <CatalogueCard data={e} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </Main>
-            <Footer/>
+            <Footer />
         </Layout>
     )
 }

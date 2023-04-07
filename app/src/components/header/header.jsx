@@ -1,6 +1,5 @@
 import React from "react"
 import styles from './header.module.css'
-import bgPreview from "../../bg-preview.jpg"
 import { useNavigate } from "react-router-dom"
 import Logo from "../svg/logo"
 
@@ -10,11 +9,11 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
-                <Logo />
+                <Logo color={"--back-color"} />
                 <p>Stylia Online</p>
             </div>
             <ul>
-                <li>Главная</li>
+                <li onClick={() => navigate("/")}>Главная</li>
                 <li onClick={() => navigate("/aboutme")}>О нас</li>
                 <li onClick={() => navigate("/product")}>Товары</li>
                 <li onClick={() => navigate("/contact")}>Контакты</li>

@@ -6,9 +6,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Error from './components/error';
+import Error from './routing/error';
 import Catalogue from './routing/catalogue'
 import Product from './routing/product';
+import Contact from './routing/contact';
+import Aboutme from './routing/aboutme';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/aboutme",
-    element: <div>aboutme</div>,
+    element: <Aboutme/>,
   },
   {
     path: "/product",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/contact",
-    element: <div>contact</div>,
+    element: <Contact/>,
   },
 ]);
 

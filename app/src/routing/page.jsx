@@ -5,7 +5,7 @@ import styles from './page.module.css'
 import { ScrollTrigger, Tween } from "react-gsap"
 import {product} from "../components/constant"
 import { useRef } from "react";
-import ProductCardFavorite from "../components/favorite-product";
+import ProductCardFavorite from "../components/favorite-product/favorite-product";
 import { useNavigate } from "react-router-dom"
 
 import bgNew from "../bg-new.png"
@@ -17,6 +17,7 @@ import Logo from "../components/svg/logo";
 function Page() {
   const navigate = useNavigate()
   const newproductTrigger = useRef(null);
+  
   return (
     <Layout>
       <header className={styles.preview} style={{ background: `url('${bgPreview}') bottom no-repeat`, backgroundSize: "cover" }}>
@@ -85,10 +86,10 @@ function Page() {
 
         {/* Блок с новыми товарами */}
         <section ref={newproductTrigger} className={styles.newproduct} style={{ backgroundImage: `url('${bgNew}')`, backgroundSize: "cover", backgroundPosition: "center" }}>
-          <ScrollTrigger start="-200px center" end="600px center" scrub={0.5}>
+          <ScrollTrigger start="-400px center" end="300px center" scrub={0.5} markers>
             <Tween
               from={{
-                x: '-1000',
+                x: '-1200',
                 rotation: 0
               }}
               to={{
@@ -96,13 +97,13 @@ function Page() {
                 rotation: -45
               }}
             >
-              <div className={styles.newproduct__img} style={{ top: 50, left: 1000, borderRadius: "50% 30px 50% 30px" }}>
+              <div className={styles.newproduct__img} style={{ top: 50, left: 1400, borderRadius: "50% 30px 50% 30px" }}>
                 <img width={300} src={chairNew} alt="img" />
               </div>
             </Tween>
             <Tween
               from={{
-                x: '1000',
+                x: '1200',
                 rotation: 0
               }}
               to={{
@@ -110,7 +111,7 @@ function Page() {
                 rotation: 145
               }}
             >
-              <div className={styles.newproduct__img} style={{ top: 50, right: 1000, borderRadius: "30px 50% 30px 50%" }}>
+              <div className={styles.newproduct__img} style={{ top: 50, right: 1400, borderRadius: "30px 50% 30px 50%" }}>
                 <img width={300} src={chairNew2} alt="img" />
               </div>
             </Tween>
