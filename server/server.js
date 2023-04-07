@@ -3,12 +3,11 @@ const express = require('express')
 const app = express();
 
 const sequelize = require("./db")
-
-const cors = require('cors')
-app.use(cors({origin: "http://localhost:3000"}));
-
-const PORT = process.env.PORT
 const WEBSITE = process.env.WEBSITEPORT
+const cors = require('cors')
+app.use(cors({origin: WEBSITE}));
+
+const SERVER_PORT = process.env.SERVER_PORT
 const models = require('./models/models')
 const routers = require('./routers/index')
 const ErrorMid= require("./middlware/middlware")
@@ -22,8 +21,8 @@ const start = async () =>{
     try {
         await sequelize.authenticate()
         await sequelize.sync()
-        app.listen(PORT, (error) => {
-            error ? console.log(error) : console.log(`listen ${PORT} port`)
+        app.listen(SERVER_PORT, (error) => {
+            error ? console.log(error) : console.log(`listen ${SERVER_PORT} port`)
         })
     } catch (e) {
         console.log(e);
