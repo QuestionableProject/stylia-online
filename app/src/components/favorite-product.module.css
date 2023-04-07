@@ -1,0 +1,12 @@
+.card  {
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 1s;
+}
+.card:hover {
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.card img {
+    width: 100px; height: 150px;
+    object-fit:cover;
+}

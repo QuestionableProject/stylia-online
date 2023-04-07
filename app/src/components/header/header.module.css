@@ -1,0 +1,40 @@
+.header {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid white;
+    justify-items: center;
+    animation: previewText 3s;
+    color: var(--back-color);
+}
+.logo {
+    margin-right: auto;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+}
+.logo p {
+    animation: logoAnimation 1s;
+}
+.header ul {
+    display: flex;
+    gap: 20px;
+}
+.header ul li {
+    position: relative;
+    cursor: pointer;
+}
+.header ul li:hover::before {
+    transform: scaleX(1);
+    transition: transform 1s;
+}
+.header ul li::before{
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: white;
+    position: absolute;
+    left: 0; bottom: -5px;
+    transform: scaleX(0);
+    transition: transform .25s;
+}

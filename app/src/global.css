@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&display=swap');
+
+:root {
+    --decoration-color: black;
+    --back-color: rgb(19, 23, 21);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cormorant', serif;
+}
+body::-webkit-scrollbar {
+    width: 5px;
+    background: rgb(64, 65, 65);
+}
+body::-webkit-scrollbar-thumb {
+    background: var(--back-color);
+}
+html, body {
+    overflow-x: hidden;
+}
+li {
+    list-style: none;
+}
+button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+input {
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,25 @@
+.catalogue {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: minmax(200px,300px) 1fr;
+    height: 100%;
+    padding: 0 50px;
+}
+.category li {
+    padding: 20px;
+    border: 1px solid black;
+    border-bottom: none;
+    cursor: pointer;
+    transition: transform .5s;
+}
+.category li:hover {
+    transform: scaleY(1.1);
+}
+.category li:last-child {
+    border-bottom: 1px solid black;
+}
+
+.catalogue__block {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
