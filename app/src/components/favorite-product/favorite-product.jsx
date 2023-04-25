@@ -6,7 +6,7 @@ export const ProductCardFavorite = ({data}) => {
     const navigate = useNavigate()
     return (
         <div className={styles.card} onClick={() => navigate(`/product/${data.id}`)}>
-            <img src={data.photo} alt={data.name} />
+            <img src={data.image} alt={data.name} />
             <div className={styles.card__text}>
                 <p>{data.name}</p>
                 <b>{data.prise} ₽</b>

@@ -3,17 +3,34 @@
     gap: 50px;
     grid-template-columns: minmax(200px,300px) 1fr;
     height: 100%;
-    text-transform: uppercase;
 }
-.category li {
+.category {
+    background: var(--back-color);
+    border-radius: 10px;
+    color: white;
+}
+.category dt {
     padding: 20px;
-    border: 1px solid var(--back-color);
-    border-bottom: none;
     cursor: pointer;
-    transition: transform .5s;
+    transition: background .7s;
 }
-.category li:last-child {
-    border-bottom: 1px solid var(--back-color);
+.category dl:first-child dt {
+    border-radius: 10px 10px 0 0;
+}
+.category dl:last-child dt {
+    border-radius: 0 0 10px 10px;
+}
+.category dt:hover {
+    background: var(--btn-hover);
+}
+.category dd {
+    display: none;
+    padding: 10px 50px;
+    cursor: pointer;
+    transition: background .7s;
+}
+.category dd:hover {
+    background: var(--btn-hover);
 }
 .catalogue__filter {
     display: flex;
@@ -43,5 +60,5 @@
 .catalogue__cardlist {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, 300px);
 }

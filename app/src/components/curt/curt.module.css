@@ -1,0 +1,31 @@
+.curt {
+    position: fixed;
+    padding: 50px;
+    min-width: 30%;
+    height: 100vh;
+    background: white;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    text-transform: uppercase;
+}
+.curt__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.curt h3 {
+    font-size: 30px;
+    text-align: center;
+}
+.curt button {
+    background: var(--back-color);
+    width: 100%;
+    padding: 10px 0;
+    transition: background .7s;
+    color: white;
+}
+.curt button:hover {
+    background: var(--btn-hover);
+}

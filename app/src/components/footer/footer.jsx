@@ -13,7 +13,7 @@ export const Footer = () => {
             <h1>Stylia Online</h1>
             <div className={styles.footer__block}>
                 <ul>
-                    <li>Главная</li>
+                    <li onClick={() => navigate("/")}>Главная</li>
                     <li onClick={() => navigate("/aboutme")}>О нас</li>
                     <li onClick={() => navigate("/product")}>Товары</li>
                     <li onClick={() => navigate("/contact")}>Контакты</li>

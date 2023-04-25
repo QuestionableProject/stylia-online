@@ -1,0 +1,145 @@
+.productform {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+.headtext {
+    font-size: 30px;
+    text-align: center;
+}
+
+.addproduct {
+    height: 70px;
+    border: 1px solid black;
+    font-size: 50px;
+}
+
+.productform form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: var(--back-color);
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.productform form p {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.productform form input {
+    padding: 10px 30px 10px 10px;
+    border-bottom: 1px solid white;
+    background: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+.productform form button {
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    background: white;
+    color: black;
+}
+
+.productform form label {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.file {
+    display: none;
+}
+
+.productform__block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.productform__block::-webkit-scrollbar {
+    width: 5px;
+    background: rgb(64, 65, 65);
+}
+
+.productform__block::-webkit-scrollbar-thumb {
+    background: var(--back-color);
+}
+
+.productcard {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid var(--back-color);
+    padding: 10px;
+}
+
+.productcard__text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.productcard label img {
+    object-fit: cover;
+    height: 100%;
+    width: 100px;
+}
+
+.productcard label {
+    cursor: pointer;
+}
+
+.tools {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tools button {
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.tools button:nth-child(1) {
+    background: rgb(226, 153, 153);
+}
+
+.tools button:nth-child(2) {
+    background: rgb(226, 222, 153);
+}
+
+.productcard__text input {
+    border-bottom: 1px solid var(--back-color);
+    height: 30px;
+    
+}
+
+.product {
+    display: flex;
+    gap: 50px;
+    width: 100%;
+}

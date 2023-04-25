@@ -1,0 +1,24 @@
+.aboutme {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.aboutme section {
+    display: grid;
+    gap: 20px;
+    text-align: justify;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 400px;
+}
+.aboutme section img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+.reviews h3 {
+    text-align: center;
+}
+.reviews__block {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}

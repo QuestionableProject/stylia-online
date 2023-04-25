@@ -19,7 +19,7 @@ class usercontroller {
         if (OldUser) return next(ApiError.badRequest("Вы не можете использовать такой логин"))
         const HashPass = await bcrypt.hash(password, 5)
         const user = await User.create({ login, password: HashPass, name: "User",image: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" })
-        return res.json("Пользователь зарегистрирован")
+        return res.json({message: "Пользователь зарегистрирован", register: true})
     }
     async login(req, res, next) {
         const { login, password } = req.body
@@ -28,11 +28,11 @@ class usercontroller {
         let checkpass = bcrypt.compareSync(password, user.password)
         if (!checkpass) return next(ApiError.badRequest("Не верный пароль"))
         const token = generatejwt(user.id, user.login, user.name, user.image, user.role)
-        return res.json({ token })
+        return res.json({ token: token, nickname: user.name, image: user.image, id: user.id })
     }
     async auth(req, res) {
         const token = generatejwt(req.user.id, req.user.login, req.user.name, req.user.image, req.user.role)
-        return res.json({ token })
+        return res.json({ token: token, nickname: req.user.name, image: req.user.image, id: req.user.id })
     }
     async rename(req, res) {
         const { userId, newName } = req.body
@@ -51,8 +51,8 @@ class usercontroller {
                 id: userId
             }
         })
-        const token = generatejwt(user.id, user.login, user.name, user.image, user.role)
-        return res.json({ token })
+        const nickname = user.name 
+        return res.json({nickname: nickname })
     }
 
 }

@@ -4,43 +4,84 @@
     grid-template-columns: repeat(3, 1fr);
     border-bottom: 1px solid var(--back-color);
     justify-items: center;
-    animation: previewText 3s;
+    animation: previewText 2s;
     color: var(--back-color);
-    text-transform: uppercase;
-    animation: previewText 3s;
 }
+
+.hamburgericon {
+    display: none;
+    cursor: pointer;
+}
+
 .logo {
     margin-right: auto;
     gap: 20px;
     display: flex;
     align-items: center;
 }
+
 .logo p {
     animation: logoAnimation 1s;
 }
+
 .header ul {
     display: flex;
     gap: 20px;
 }
+
 .header ul li {
     position: relative;
     cursor: pointer;
 }
+
 .header ul li:hover::before {
     transform: scaleX(1);
     transition: transform 1s;
 }
-.header ul li::before{
+
+.header ul li::before {
     content: '';
     width: 100%;
     height: 1px;
     background: var(--back-color);
     position: absolute;
-    left: 0; bottom: -5px;
+    left: 0;
+    bottom: -5px;
     transform: scaleX(0);
     transition: transform .25s;
 }
+
 @keyframes previewText {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .hamburgericon {
+        display: block;
+        
+    }
+    .logo {
+        margin: 0;
+    }
+    .header ul {
+        display: none;
+    }
+}
+@media screen and (max-width: 400px) {
+    .header {
+        align-items: center;
+        flex-direction: column;
+    }
 }

@@ -1,0 +1,87 @@
+.login__block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    width: 600px;
+    height: 400px;
+    background: white;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px 50px 0 50px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.login__block form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+    gap: 20px;
+}
+
+.login__block input {
+    height: 30px;
+    width: 200px;
+    padding: 5px 10px;
+}
+
+.login__blockInput {
+    transition: all 1s;
+    border-bottom: 1px solid var(--back-color);
+}
+
+.login__block p {
+    margin-bottom: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.login__block p:hover::before {
+    transform: scaleX(1);
+    transition: transform 1s;
+}
+
+.login__block p::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: var(--back-color);
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transform: scaleX(0);
+    transition: transform .25s;
+}
+
+.login__block button {
+    background: var(--back-color);
+    color: white;
+    width: 200px;
+    padding: 10px 0;
+    transition: background .7s;
+}
+.login__block button:hover {
+    background: var(--btn-hover);
+}
+
+.errorPassword {
+    border-bottom: 1px solid red;
+    animation: Shake .5s;
+}
+
+@keyframes Shake {
+    0%   {transform: translateX(0px);}
+
+    25%  {transform: translateX(10px);}
+
+    75%  {transform: translateX(-10px);}
+
+    100% {transform: translateX(0px);}
+}

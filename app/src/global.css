@@ -3,6 +3,7 @@
 :root {
     --decoration-color: black;
     --back-color: rgb(19, 23, 21);
+    --btn-hover: rgb(61, 69, 65);
 }
 
 * {
@@ -24,11 +25,16 @@ html, body {
 li {
     list-style: none;
 }
+a {
+    text-transform: uppercase;
+    text-decoration: none;
+}
 button {
     background: none;
     border: none;
     outline: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 input {
     outline: none;

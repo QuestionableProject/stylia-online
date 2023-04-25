@@ -7,7 +7,6 @@
     animation: preview 2s;
     height: 100vh;
     color: white;
-    text-transform: uppercase;
     margin: 0 -50px;
 }
 
@@ -27,6 +26,8 @@
     border-bottom: 1px solid white;
     justify-items: center;
     animation: previewText 3s;
+    color: white; 
+    animation: previewText 3s;
 }
 .logo {
     margin-right: auto;
@@ -41,15 +42,18 @@
     display: flex;
     gap: 20px;
 }
-.header ul li {
+.link__catalog {
+    font-size: 30px;
+}
+.header ul li, .link__catalog {
     position: relative;
     cursor: pointer;
 }
-.header ul li:hover::before {
+.header ul li:hover::before, .link__catalog:hover::before {
     transform: scaleX(1);
     transition: transform 1s;
 }
-.header ul li::before{
+.header ul li::before , .link__catalog::before{
     content: '';
     width: 100%;
     height: 1px;
@@ -59,7 +63,26 @@
     transform: scaleX(0);
     transition: transform .25s;
 }
-
+@media screen and (max-width: 900px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .hamburgericon {
+        display: block;
+        
+    }
+    .header ul {
+        display: none;
+    }
+}
+@media screen and (max-width: 400px) {
+    .header {
+        align-items: center;
+        flex-direction: column;
+    }
+}
 /* Тело страницы */
 
 .main {
@@ -70,17 +93,7 @@
     flex: 1;
     animation: previewText 3s;
 }
-.main button {
-    text-transform: uppercase;
-    color: white;
-    border: 2px solid rgb(0, 0, 0,0);
-    padding: 15px 40px;
-    border-radius: 25px;
-    transition: border 1s;
-}
-.main button:hover {
-    border: 2px solid white;
-}
+
 .preview__text p:nth-child(1){
     font-size: 30px;
     white-space: nowrap;
@@ -94,8 +107,8 @@
     100% { transform: translateX(0);}
 }
 @keyframes preview {
-    0% { background-size: 130%; }
-    100% { background-size: 100%; }
+    0% {  }
+    100% { }
 }
 @keyframes previewText {
     0% { opacity: 0; }
@@ -104,8 +117,7 @@
 
 /* О нас */
 .aboutme {
-    height: 700px;
-    text-transform: uppercase;
+    height: 700px; 
 }
 .aboutme__text {
     display: grid;
