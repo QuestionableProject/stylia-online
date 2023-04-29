@@ -60,13 +60,13 @@ export const App = () => {
         userCheck(Cookies.get('token'))
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 if (data.token) {
                     dispatch(setUser({
                         token: data.token,
                         image: data.image,
                         nickname: data.nickname,
-                        id: data.id
+                        id: data.id,
+                        role: data.role
                     }))
                     Cookies.set('token', data.token, { expires: 365 })
                 }

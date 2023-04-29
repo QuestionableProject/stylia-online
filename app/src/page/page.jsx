@@ -14,7 +14,7 @@ import bgPreview from "../bg-preview.jpg"
 import Header from "../components/header/header";
 import Loader from "../components/loader";
 
-function Page() {
+export const Page = () =>  {
   const [favoriteProduct, setfavoriteProduct] = useState()
   const [loader, setLoader] = useState(true)
 
@@ -47,6 +47,7 @@ function Page() {
           </div>
         </div>
       </div>
+      
       <Main>
         {/* Блок о нас */}
         <section className={styles.aboutme}>

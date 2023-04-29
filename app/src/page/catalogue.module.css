@@ -3,6 +3,7 @@
     gap: 50px;
     grid-template-columns: minmax(200px,300px) 1fr;
     height: 100%;
+    align-items: start;
 }
 .category {
     background: var(--back-color);
@@ -21,15 +22,6 @@
     border-radius: 0 0 10px 10px;
 }
 .category dt:hover {
-    background: var(--btn-hover);
-}
-.category dd {
-    display: none;
-    padding: 10px 50px;
-    cursor: pointer;
-    transition: background .7s;
-}
-.category dd:hover {
     background: var(--btn-hover);
 }
 .catalogue__filter {

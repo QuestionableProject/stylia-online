@@ -5,3 +5,8 @@
 .layout button {
     text-transform: uppercase;
 }
+@media screen and (max-width: 550px) {
+    .layout {
+        padding: 0 10px;
+    }
+}

@@ -2,6 +2,27 @@ import React from "react"
 import styles from './product-form.module.css'
 
 export const ProductFormCard = ({ data }) => {
+
+    async function removeProduct() {
+        await fetch(`${process.env.REACT_APP_SERVER}/api/products/removeProd`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: data.id,
+            })
+        })
+            .then(response => {
+                return response.json()
+            }).then((data) => {
+                if (data.message){
+                    alert(data.message);
+                }
+            }).catch((e) => {
+                console.log(e);
+            });
+    }
     return (
         <div className={styles.productcard}>
             <div className={styles.product}>
@@ -10,15 +31,14 @@ export const ProductFormCard = ({ data }) => {
                 </label>
                 <input type="file" id="imageproduct" style={{ display: "none" }} />
                 <div className={styles.productcard__text}>
-                    <input type="text" placeholder={data.name} />
-                    <input type="text" placeholder={data.prise} />
-                    <input type="text" placeholder={data.description} />
-                    <input type="text" placeholder={data.category} />
+                    <p>{data.name}</p>
+                    <p>{data.prise}</p>
+                    <p>{data.description}</p>
+                    <p>{data.category}</p>
                 </div>
             </div>
             <div className={styles.tools}>
-                <button>Удалить</button>
-                <button>Изменить</button>
+                <button onClick={() => removeProduct()}>Удалить</button>
             </div>
         </div>
     )

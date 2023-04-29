@@ -54,12 +54,11 @@ export const Login = ({ open, onToggle }) => {
                     token: data.token,
                     image: data.image,
                     nickname: data.nickname,
-                    id: data.id
+                    id: data.id,
+                    role: data.role,
                 }))
                 Cookies.set('token', data.token, { expires: 365 })
-                
-                setInLogin("")
-                setInPassword("")
+                onToggle(false)
                 navigate("/profile")
             }
             if (data.message) {
@@ -101,14 +100,10 @@ export const Login = ({ open, onToggle }) => {
             return response.json()
         }).then((data) => {
             if (data.register) {
-                console.log(data)
                 setEnable(false)
                 setOutLogin("")
                 setOutPassword("")
                 setOutPassword2("")
-            }
-            if (data.message) {
-                console.log(data.message)
             }
         }).catch((e) => {
             alert(e)

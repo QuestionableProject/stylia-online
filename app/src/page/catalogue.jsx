@@ -1,41 +1,84 @@
-import React, { useEffect,  useState } from "react"
+import React, { useEffect, useState } from "react"
 import Header from "../components/header/header"
 import Layout from "../layout"
 import Footer from "../components/footer/footer"
 import Main from "../components/main/main"
-import { category } from "../components/constant"
 import CatalogueCard from "../components/calagoue-card/catalogue-card"
 import styles from './catalogue.module.css'
 import Loader from "../components/loader"
+import { useProduct } from "../hooks/use-product"
+import { useDispatch } from "react-redux"
+import { setProduct } from "../store/slices/productSlice"
 
 
 export const Catalogue = () => {
-    const [productArray, setProductArray] = useState()
+    const dispatch = useDispatch()
+    const { product } = useProduct()
+    const [productState, setProductState] = useState()
+    const [categoryState, setCategoryState] = useState()
+
     const [loader, setLoader] = useState(true)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER}/api/products`)
-            .then(response => {
-                return response.json()
-            }).then((data) => {
-                setLoader(false)
-                setProductArray(data)
-            }).catch((e) => {
-                console.log(e);
-            });
+        const productGet = async () => {
+            fetch(`${process.env.REACT_APP_SERVER}/api/products`)
+                .then(response => {
+                    return response.json()
+                }).then((data) => {
+                    setLoader(false)
+                    dispatch(setProduct({
+                        product: data
+                    }))
+                    setProductState(data)
+                }).catch((e) => {
+                    console.log(e);
+                });
+        }
+        const categoryGet = async () => {
+            fetch(`${process.env.REACT_APP_SERVER}/api/category`)
+                .then(response => {
+                    return response.json()
+                }).then((data) => {
+                    setCategoryState(data)
+                }).catch((e) => {
+                    console.log(e);
+                });
+        }
+        productGet()
+        categoryGet()
     }, [])
 
 
-    const openList = (e) => {
-        const filter = e.target.dataset['category'];
-        console.log(filter);
-        // filter.forEach(e => {
-        //     if(!e.classList.contains(filter)) {
+    const buyCount = () => {
+        const productFilter = [...product]
+        productFilter.sort(function (a, b) {
+            return b.buyCount - a.buyCount;
+        });
+        setProductState(productFilter)
 
-        //     }
-        // })
+    }
+    const highprise = () => {
+        const productFilter = [...product]
+        productFilter.sort(function (a, b) {
+            return b.prise - a.prise;
+        });
+        setProductState(productFilter)
+    }
+    const lowprise = () => {
+        const productFilter = [...product]
+        productFilter.sort(function (a, b) {
+            return a.prise - b.prise;
+        });
+        setProductState(productFilter)
     }
 
+    const categoryFilter = (e) => {
+        if (e === "Все товары") return setProductState(product)
+        const productFilter = [...product]
+
+        const filterArray = productFilter.filter(item => item.category === e);
+        setProductState(filterArray)
+    }
     return (
         <Layout>
             <Header />
@@ -43,27 +86,27 @@ export const Catalogue = () => {
             <Main>
                 <div className={styles.catalogue}>
                     <div className={styles.category}>
-                        {category.map((e) =>
+                        <dl>
+                            <dt onClick={() => categoryFilter("Все товары")} className={styles.category__name}>Все товары</dt>
+                        </dl>
+                        {categoryState?.map((e) =>
                             <dl key={e.id}>
-                                <dt onClick={openList} data-category={e.name} className={styles.category__name}>{e.name}</dt>
-                                {e.material.map(a =>
-                                    <dd data-category={e.name} key={a.id} className={styles.category__material}>{a.name}</dd>
-                                )}
+                                <dt onClick={() => categoryFilter(e.name)} className={styles.category__name}>{e.name}</dt>
                             </dl>
                         )}
                     </div>
                     <div className={styles.catalogue__block}>
                         <ul className={styles.catalogue__filter}>
-                            <li>По популярности</li>
-                            <li>Сначала дешевое</li>
-                            <li>Сначала дорогое</li>
+                            <li onClick={() => buyCount()}>По популярности</li>
+                            <li onClick={() => lowprise()}>Сначала дешевое</li>
+                            <li onClick={() => highprise()}>Сначала дорогое</li>
                         </ul>
                         {loader ?
                             <Loader />
                             :
                             <div className={styles.catalogue__cardlist}>
                                 {
-                                    productArray.map((e) =>
+                                    productState?.map((e) =>
                                         <CatalogueCard key={e.id} data={e} />
                                     )
                                 }

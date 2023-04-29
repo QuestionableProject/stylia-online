@@ -5,11 +5,13 @@
 .address {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 40px;
     padding: 20px;
     color: white;
     border-radius: 20px 0 0 20px;
     background: var(--back-color);   
+    height: 520px;
 }
 .address__card {
     display: flex;

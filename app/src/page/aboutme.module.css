@@ -1,7 +1,7 @@
 .aboutme {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 70px;
 }
 .aboutme section {
     display: grid;
@@ -21,4 +21,12 @@
     display: flex;
     justify-content: space-between;
     gap: 50px;
+}
+
+@media screen and (max-width: 765px) {
+    .aboutme section {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+    
 }

@@ -24,6 +24,11 @@
 .userform__block::-webkit-scrollbar-thumb {
     background: var(--back-color);
 }
+.tools {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 .tools button {
     padding: 10px;
     width: 100%;

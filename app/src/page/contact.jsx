@@ -1,14 +1,34 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Layout from "../layout"
 import Header from "../components/header/header"
 import Footer from "../components/footer/footer"
 import Main from "../components/main/main"
 import { YMaps, Map, Placemark, ZoomControl } from "react-yandex-maps";
 import styles from './contact.module.css'
-import { addressData } from "../components/constant"
 
 
 export const Contact = () => {
+    const [addressState, setAddressState] = useState()
+    useEffect(() => {
+            const addressGet = async () => {
+                await fetch(`${process.env.REACT_APP_SERVER}/api/address/`)
+                    .then(response => {
+                        return response.json()
+                    }).then((data) => {
+                        if (data) {
+                            setAddressState(data)
+                        }
+                    }).catch((e) => {
+                        console.log(e);
+                    });
+            }
+            addressGet()
+    }, [])
+
+    const enable = (e) => {
+        document.querySelector(`[data-address=${e}]`).style.opacity = ".5"
+    }
+
     return (
         <Layout>
             <Header />
@@ -16,8 +36,8 @@ export const Contact = () => {
                 <h3>Нас легко найти</h3>
                 <div className={styles.conteiner__map}>
                     <div className={styles.address}>
-                        {addressData.map(e => 
-                            <div className={styles.address__card}>
+                        {addressState?.map((e, i) => 
+                            <div key={i} data-address={`address${i}`} className={styles.address__card}>
                                 <p>Время работы: {e.time}</p>
                                 <p>Адрес: {e.address}</p>
                                 <a href={`tel:${e.phone}`}>Телефон: {e.phone}</a>
@@ -27,9 +47,9 @@ export const Contact = () => {
                     <YMaps>
                         <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} width={"100%"} height={"100%"}>
                             <ZoomControl />
-                            <Placemark geometry={[55.783553, 37.560106]}/>
-                            <Placemark geometry={[55.680707, 37.715830]} />
-                            <Placemark geometry={[55.679401, 37.468327]} />
+                            {addressState?.map((e ,i)=> 
+                                <Placemark key={i} onClick={() => enable(`address${i}`)} geometry={e.map}/>
+                            )}
                         </Map>
                     </YMaps>
                 </div>

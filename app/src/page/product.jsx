@@ -6,7 +6,6 @@ import Header from "../components/header/header";
 import Main from "../components/main/main";
 import Loader from "../components/loader";
 import styles from './product.module.css'
-import Hurt from "../components/svg/hurt";
 import { useAuth } from "../hooks/use-auth";
 
 export const Product = () => {
@@ -14,25 +13,39 @@ export const Product = () => {
     const [loader, setLoader] = useState(true)
     const [errorProduct, setErrorProduct] = useState(false)
     const { productId } = useParams()
-    const {isAuth} = useAuth()
+    const {isAuth, id} = useAuth()
 
-    const favorite = async () => {
-        if (!isAuth) return alert("Войдите в аккаунт") 
-        alert("Добавил");
-    }
     const buy = async () => {
         if (!isAuth) return alert("Войдите в аккаунт") 
-        alert("Купил");
+        
+        await fetch(`${process.env.REACT_APP_SERVER}/api/curt`, {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productGet.id,
+                userId: id
+            })
+        }).then(response => {
+            return response.json()
+        }).then((data) => {
+            if (data.message) {
+                alert(data.message)
+            }
+
+        }).catch((e) => {
+            alert(e)
+        });
     }
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER}/api/products/${productId}`)
+        const getProductOne = async()=> { fetch(`${process.env.REACT_APP_SERVER}/api/products/${productId}`)
             .then(response => {
                 return response.json()
             }).then((data) => {
                 if (data) {
-                    console.log(data);
                     setProductGet(data)
                     setLoader(false)
                 }
@@ -43,6 +56,8 @@ export const Product = () => {
             }).catch((e) => {
                 console.log(e);
             });
+        }
+        getProductOne()
     }, [])
 
     return (
@@ -67,13 +82,15 @@ export const Product = () => {
                                             <p>{productGet.prise} ₽</p>
                                         </header>
                                         <main>
-                                            <p>{productGet.description}</p>
+                                            {productGet.productsDescription?.productsDescriptionCharacters.map((e, i) =>
+                                                <div key={i} className={styles.description}>
+                                                    <p>{e.name}</p>
+                                                    <p>{e.character}</p>
+                                                </div>
+                                            )}
                                         </main>
                                         <div className={styles.btn}>
                                             <button onClick={buy}>Добавить в корзину</button>
-                                            <button onClick={favorite}>
-                                                <Hurt/>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>

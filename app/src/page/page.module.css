@@ -28,6 +28,7 @@
     animation: previewText 3s;
     color: white; 
     animation: previewText 3s;
+    text-align: center;
 }
 .logo {
     margin-right: auto;

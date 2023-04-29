@@ -12,13 +12,24 @@ import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
 
 export const Profile = () => {
-    const { isAuth, nickname, image, id } = useAuth()
+    const { isAuth, nickname, image, id, role } = useAuth()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [rename, setRename] = useState(false)
+    const [oferHistory, setOferHistory] = useState(false)
+    const [oferState, setOferState] = useState()
     const [nicknameState, setNicknameState] = useState("")
+
+    const [color1, setColor1] = useState("black")
+    const [color2, setColor2] = useState("black")
     const inputRef = useRef()
+
+
+    useEffect(() => {
+        setColor1('#' + Math.floor(Math.random() * 16777215).toString(16))
+        setColor2('#' + Math.floor(Math.random() * 16777215).toString(16))
+    }, [])
 
     useEffect(() => {
         if (rename) {
@@ -40,12 +51,12 @@ export const Profile = () => {
                     }).then(response => {
                         return response.json()
                     }).then((data) => {
-                        console.log(data);
                         dispatch(setUser({
                             token: Cookies.get('token'),
                             image: image,
                             nickname: data.nickname,
-                            id: id
+                            id: id,
+                            role: role
                         }))
                     }).catch((e) => {
                         alert(e)
@@ -60,6 +71,29 @@ export const Profile = () => {
         }
     }, [inputRef, rename])
 
+    async function HistoryCheck() {
+        if (oferHistory) return setOferHistory(false)
+
+        setOferHistory(true)
+
+        await fetch(`${process.env.REACT_APP_SERVER}/api/ofer/getofer`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: id,
+            })
+        })
+            .then(response => {
+                return response.json()
+            }).then((data) => {
+                setOferState(data)
+            }).catch((e) => {
+                console.log(e);
+            });
+    }
+
     return (
         <Layout>
             <Header user={true} />
@@ -67,13 +101,15 @@ export const Profile = () => {
                 {isAuth ? (
                     <div className={styles.profile}>
                         <div className={styles.user}>
-                            <div className={styles.backgroud}></div>
-                            <div className={styles.user__img}>
+                            <div className={styles.backgroud} style={{ background: `linear-gradient(172deg, ${color1} 0%, ${color2} 100%)` }}></div>
+                            <div className={styles.user__img} style={role === "admin" ? { border: `10px ${color1} solid` } : { border: "10px white solid" }}>
                                 <img src={image} alt="Юзер никнейм" />
                             </div>
                             <div className={styles.profile__text}>
                                 <div className={styles.user__information}>
-                                    <p style={{cursor: "pointer"}} onClick={() => navigate("/admin")}>adminpanel</p>
+                                    {role === "admin" && (
+                                        <p style={{ cursor: "pointer" }} onClick={() => navigate("/admin")}>adminpanel</p>
+                                    )}
                                     {!rename ? (
                                         <p data-input onClick={() => { setRename(true); setNicknameState(nickname); }} className={styles.nickname}>{nickname}</p>
                                     ) : (
@@ -83,13 +119,43 @@ export const Profile = () => {
                                     )}
                                 </div>
                                 <ul className={styles.user__menu}>
-                                    <li>История заказов</li>
-                                    <li>Активные заказы</li>
-                                    <li>Избранное</li>
+                                    <li onClick={HistoryCheck}>История заказов</li>
                                 </ul>
                             </div>
                         </div>
+                        {oferHistory && (
+                            <div className={styles.ofer}>
+                                <h2>История заказов</h2>
+                                <div className={styles.ofer__block}>
+                                    {oferState?.map((e, i) =>
+                                        <div key={i} className={styles.ofer__card} style={e.active ? { opacity: ".6" } : null}>
+                                            <div className={styles.card__block}>
+                                                <div className={styles.ofer__info}>
+                                                    <p>Дата оформления: {e.createdAt.slice(0, 16).replace(['T'], " Время: ")}</p>
+                                                    <p>Имя: {e.name}</p>
+                                                    <p>Адресс доставки: {e.address}</p>
+                                                </div>
+                                                {!e.active ? (
+                                                    <p>Заказ активен</p>
+                                                ) : (
+                                                    <p>Заказ Выполнен</p>
+                                                )}
+                                            </div>
+                                            <div className={styles.ofer__product}>
+                                                {e.oferproducts.map((e, i) =>
+                                                    <img key={i} onClick={() => navigate(`/product/${e.product.id}`)} src={e.product.image} alt={e.product.name} />
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                {oferState && (
+                                    <p style={{textAlign: "center"}}>Заказов нет</p>
+                                )}
+                            </div>
+                        )}
                     </div>
+
                 ) : (
                     <div className={styles.profile}>
                         <div className={styles.login}>

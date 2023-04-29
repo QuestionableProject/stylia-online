@@ -1,34 +1,32 @@
 const { User } = require("../models/models")
 
 class UserChangeController {
-
-    async getAll(req,res) {
+    async remove(req, res) {
+        const { userId } = req.body
+        const removeUser = await User.destroy({
+            where: { id: userId }
+        })
+        return res.json({ message: `Пользователь ${userId} удален` })
+    }
+    async getAll(req, res) {
         const UserGet = await User.findAll({
             attributes: [
                 "login",
-                "role"
+                "role",
+                "id"
             ],
         })
         return res.json(UserGet)
     }
 
-    async update(req,res) {
-        const {id} = req.params
-        const product = await Products.findOne({
-            where: {id},
-            attributes: [
-                "id",
-                "description",
-                "name",
-                "image",
-                "prise",
-                "category",
-            ],
-            // include: [{
-            //     model: ProductCharacter,
-            // }]
+    async userRoleChange(req, res) {
+        const { userId, role } = req.body
+        const user = await User.findOne({
+            where: {id: userId}
         })
-        // return res.json(product)
+        user.role = role;
+        await user.save();
+        return res.json({ message: `Пользователь ${userId} теперь ${role}` })
     }
 }
 

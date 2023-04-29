@@ -8,6 +8,8 @@ router.post('/registration', usercontol.registration)
 router.post('/login', usercontol.login)
 router.post('/rename',  usercontol.rename)
 router.get('/auth',  auth,usercontol.auth)
-router.get('/userChange',  userchange.getAll)
+router.post('/userChange',  userchange.getAll)
+router.post('/userRemove',  userchange.remove)
+router.post('/userRoleChange',  userchange.userRoleChange)
 
 module.exports = router

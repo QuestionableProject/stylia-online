@@ -7,11 +7,12 @@ export const UserForm = ({open, onToggle}) => {
     const userRole= useRef()
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER}/api/user/userChange`)
+        fetch(`${process.env.REACT_APP_SERVER}/api/user/userChange`, {
+            method: "POST" 
+        })
             .then(response => {
                 return response.json()
             }).then((data) => {
-                console.log(data);
                 setUserState(data)
             }).catch((e) => {
                 console.log(e);
@@ -38,7 +39,7 @@ export const UserForm = ({open, onToggle}) => {
             <p className={styles.headtext}>Управление пользователями</p>
             <div className={styles.userform__block}>
                 {userState?.map((e) => 
-                    <UserFormCard data={e}/>
+                    <UserFormCard key={e.id} data={e}/>
                 )}
             </div>
         </div>

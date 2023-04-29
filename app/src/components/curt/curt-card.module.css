@@ -1,0 +1,23 @@
+.curt__card  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+}
+.curt__info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.curt__card img {
+    height: 100%;
+    object-fit: cover;
+}
+.curt__card svg {
+    cursor: pointer;
+    width: 30px;
+}

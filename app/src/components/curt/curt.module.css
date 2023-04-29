@@ -29,3 +29,50 @@
 .curt button:hover {
     background: var(--btn-hover);
 }
+.ofer__block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.ofer__block form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.ofer__block form input {
+    padding: 5px 10px;
+    height: 40px;
+    border-bottom: 1px solid var(--back-color);
+    font-size: 20px;
+}
+.checkbox {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.checkbox input {
+    display: none;
+}
+.checkbox label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--back-color);
+    font-size: 13px;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 1s, opacity 1s;
+}
+.checkbox label:hover {
+    background: var(--back-color);
+}
+.checkbox input:checked + label {
+    background: var(--btn-hover);
+    opacity: .8;
+}
+.ofer__block p {
+    cursor: pointer;
+}
