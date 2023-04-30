@@ -3,10 +3,17 @@ const { User } = require("../models/models")
 class UserChangeController {
     async remove(req, res) {
         const { userId } = req.body
-        const removeUser = await User.destroy({
+        await User.destroy({
             where: { id: userId }
         })
-        return res.json({ message: `Пользователь ${userId} удален` })
+        const UserGet = await User.findAll({
+            attributes: [
+                "login",
+                "role",
+                "id"
+            ],
+        })
+        return res.json(UserGet)
     }
     async getAll(req, res) {
         const UserGet = await User.findAll({
@@ -26,7 +33,15 @@ class UserChangeController {
         })
         user.role = role;
         await user.save();
-        return res.json({ message: `Пользователь ${userId} теперь ${role}` })
+
+        const UserGet = await User.findAll({
+            attributes: [
+                "login",
+                "role",
+                "id"
+            ],
+        })
+        return res.json(UserGet)
     }
 }
 

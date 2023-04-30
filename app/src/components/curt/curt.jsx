@@ -4,7 +4,7 @@ import CurtCard from "./curt-card"
 import Loader from "../loader"
 import { useAuth } from "../../hooks/use-auth"
 import { useDispatch } from "react-redux"
-import { setCurt } from "../../store/slices/curtSlice"
+import { removeCurt, setCurt } from "../../store/slices/curtSlice"
 import { useCurt } from "../../hooks/use-curt"
 import InputMask from 'react-input-mask';
 
@@ -40,7 +40,7 @@ export const Curt = ({ open, onToggle }) => {
                         return response.json()
                     }).then((data) => {
                         setLoader(false)
-                        if (data) {
+                        if (data.curtProducts.length !== 0) {
                             dispatch(setCurt({
                                 curt: data.curtProducts
                             }))
@@ -70,7 +70,7 @@ export const Curt = ({ open, onToggle }) => {
 
     async function oferCheck(e) {
         e.preventDefault()
-        console.log(curt);
+
         await fetch(`${process.env.REACT_APP_SERVER}/api/ofer`, {
                     method: "POST",
                     headers: {
@@ -90,6 +90,8 @@ export const Curt = ({ open, onToggle }) => {
                     }).then((data) => {
                         if (data.message) {
                             alert(data.message);
+                            setOfer(false)
+                            dispatch(removeCurt())
                         }
                     }).catch((e) => {
                         console.log(e);
@@ -140,7 +142,7 @@ export const Curt = ({ open, onToggle }) => {
                     </div>
                 )
             ) : (
-                <div>Войдите, чтобы пользоваться карзиной</div>
+                <div>Войдите, чтобы пользоваться корзиной</div>
             )}
         </div>
     )

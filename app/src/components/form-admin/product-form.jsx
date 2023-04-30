@@ -91,10 +91,8 @@ export const ProductForm = ({ open, onToggle }) => {
         }).then(response => {
             return response.json()
         }).then((data) => {
-            if (data.message) {
-                alert(data.message)
-                setForm(false)
-            }
+            setProductState(data)
+            setForm(false)
         }).catch((e) => {
             alert(e)
         });
@@ -112,7 +110,7 @@ export const ProductForm = ({ open, onToggle }) => {
             <div className={styles.productform__block}>
                 <button className={styles.addproduct} data-from onClick={() => setForm(true)}>+</button>
                 {productState?.map((e) =>
-                    <ProductFormCard key={e.id} data={e} />
+                    <ProductFormCard key={e.id} data={e} Array={setProductState}/>
                 )}
             </div>
             {form && (

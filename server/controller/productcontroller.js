@@ -11,7 +11,8 @@ class Productcontroller {
         await Products.create({
             name, category, description, prise, image: `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/${fileName}`
         })
-        return res.json({message: "Товар создан"})
+        const CheckProduct = await Products.findAll()
+        return res.json(CheckProduct)
     }
     async getCategory(req,res) {
         const categorys = await ProductCategory.findAll()
@@ -22,7 +23,7 @@ class Productcontroller {
         return res.json(CheckProduct)
     }
     async getOne(req,res) {
-        const {id} = req.params
+        const {id} = req.params 
         const product = await Products.findOne({
             where: {id},
             attributes: [
@@ -46,7 +47,8 @@ class Productcontroller {
                 }]
             }],
         })
-        return res.json(product)
+        if (product) return res.json(product)
+        else return res.json({message: "Такого товара нет" })
     }
     async removeProduct(req,res) {
         const {productId} = req.body
@@ -54,7 +56,8 @@ class Productcontroller {
         await Products.destroy({
             where: {id: productId}
         })
-        return res.json({message: "Товар удален"})
+        const CheckProduct = await Products.findAll()
+        return res.json(CheckProduct)
     }
 }
 

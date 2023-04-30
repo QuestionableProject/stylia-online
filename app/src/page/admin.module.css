@@ -1,6 +1,5 @@
 .admin {
     display: flex;
-    margin: 0 -50px;
     height: 100vh;
     overflow: hidden;
 }

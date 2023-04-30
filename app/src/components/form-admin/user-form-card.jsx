@@ -1,9 +1,13 @@
 import React from "react"
 import styles from './user-form.module.css'
+import { useAuth } from "../../hooks/use-auth";
 
-export const UserFormCard = ({ data }) => {
+export const UserFormCard = ({ data, Array }) => {
+    const {id} = useAuth()
 
     async function removeUser() {
+        if (data.id === id) return alert("Вы не можете себя удалить")
+
         await fetch(`${process.env.REACT_APP_SERVER}/api/user/userRemove`, {
             method: "POST",
             headers: {
@@ -16,9 +20,7 @@ export const UserFormCard = ({ data }) => {
             .then(response => {
                 return response.json()
             }).then((data) => {
-                if (data.message) {
-                    alert(data.message);
-                }
+                Array(data)
             }).catch((e) => {
                 console.log(e);
             });
@@ -38,9 +40,7 @@ export const UserFormCard = ({ data }) => {
             .then(response => {
                 return response.json()
             }).then((data) => {
-                if (data.message) {
-                    alert(data.message);
-                }
+                Array(data)
             }).catch((e) => {
                 console.log(e);
             });

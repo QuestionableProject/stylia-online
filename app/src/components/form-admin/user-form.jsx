@@ -39,7 +39,7 @@ export const UserForm = ({open, onToggle}) => {
             <p className={styles.headtext}>Управление пользователями</p>
             <div className={styles.userform__block}>
                 {userState?.map((e) => 
-                    <UserFormCard key={e.id} data={e}/>
+                    <UserFormCard key={e.id} data={e} Array={setUserState}/>
                 )}
             </div>
         </div>

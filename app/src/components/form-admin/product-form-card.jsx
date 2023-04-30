@@ -1,7 +1,7 @@
 import React from "react"
 import styles from './product-form.module.css'
 
-export const ProductFormCard = ({ data }) => {
+export const ProductFormCard = ({ data, Array }) => {
 
     async function removeProduct() {
         await fetch(`${process.env.REACT_APP_SERVER}/api/products/removeProd`, {
@@ -16,9 +16,7 @@ export const ProductFormCard = ({ data }) => {
             .then(response => {
                 return response.json()
             }).then((data) => {
-                if (data.message){
-                    alert(data.message);
-                }
+                Array(data)
             }).catch((e) => {
                 console.log(e);
             });

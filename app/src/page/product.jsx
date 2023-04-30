@@ -13,14 +13,14 @@ export const Product = () => {
     const [loader, setLoader] = useState(true)
     const [errorProduct, setErrorProduct] = useState(false)
     const { productId } = useParams()
-    const {isAuth, id} = useAuth()
+    const { isAuth, id } = useAuth()
 
     const buy = async () => {
-        if (!isAuth) return alert("Войдите в аккаунт") 
-        
+        if (!isAuth) return alert("Войдите в аккаунт")
+
         await fetch(`${process.env.REACT_APP_SERVER}/api/curt`, {
             method: "POST",
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -41,18 +41,17 @@ export const Product = () => {
 
 
     useEffect(() => {
-        const getProductOne = async()=> { fetch(`${process.env.REACT_APP_SERVER}/api/products/${productId}`)
+        const getProductOne = async () => {
+            fetch(`${process.env.REACT_APP_SERVER}/api/products/${productId.replace(/[^0-9]/g, '').slice(0,9)}`)
             .then(response => {
                 return response.json()
             }).then((data) => {
-                if (data) {
-                    setProductGet(data)
-                    setLoader(false)
-                }
-                if (!data) {
-                    setErrorProduct(true)
+                if (data.message) {
+                    return setErrorProduct(true)
                 }
 
+                setProductGet(data)
+                setLoader(false)
             }).catch((e) => {
                 console.log(e);
             });
@@ -82,6 +81,7 @@ export const Product = () => {
                                             <p>{productGet.prise} ₽</p>
                                         </header>
                                         <main>
+                                            <p>Категория: {productGet.category}</p>
                                             {productGet.productsDescription?.productsDescriptionCharacters.map((e, i) =>
                                                 <div key={i} className={styles.description}>
                                                     <p>{e.name}</p>

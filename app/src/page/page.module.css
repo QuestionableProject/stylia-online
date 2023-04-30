@@ -107,10 +107,6 @@
     0% { transform: translateX(-50px);}
     100% { transform: translateX(0);}
 }
-@keyframes preview {
-    0% {  }
-    100% { }
-}
 @keyframes previewText {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -137,6 +133,7 @@
 }
 .aboutme__description {
     padding: 50px;
+    text-align: justify;
 }
 .aboutme__description p:nth-child(2) {
     cursor: pointer;

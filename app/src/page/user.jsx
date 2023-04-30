@@ -149,7 +149,7 @@ export const Profile = () => {
                                         </div>
                                     )}
                                 </div>
-                                {oferState && (
+                                {!oferState && (
                                     <p style={{textAlign: "center"}}>Заказов нет</p>
                                 )}
                             </div>
