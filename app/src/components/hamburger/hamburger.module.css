@@ -1,3 +1,45 @@
 .hamburger {
-    
+    position: fixed;
+    padding: 50px;
+    min-width: 50%;
+    height: 100vh;
+    background: white;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    text-transform: uppercase;
+    overflow-y: scroll;
+}
+.curt::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.close {
+    position: absolute;
+    font-size: 30px;
+    top: 10px;
+    right: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.hamburger ul {
+    width: 100%;
+}
+.hamburger li {
+    padding: 15px 10px;
+    background: var(--back-color);
+    color: white;
+    cursor: pointer;
+}
+.hamburger li:first-child {
+    border-radius: 5px 5px 0 0;
+}
+.hamburger li:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+@media screen and (max-width: 500px) {
+    .hamburger {
+        min-width: 90%;
+    }
 }

@@ -1,9 +1,14 @@
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export function useCurt() {
-    const {curt} = useSelector(state => state.curt)
+    const { curt } = useSelector(state => state.curt)
+
+    let prises = 0
+    curt?.map(e => {
+        prises += e.product.prise
+    })
 
     return {
-        curt,
+        curt, priseCurt: prises
     }
 }

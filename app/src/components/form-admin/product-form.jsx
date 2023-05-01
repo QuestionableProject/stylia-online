@@ -77,7 +77,7 @@ export const ProductForm = ({ open, onToggle }) => {
 
         if (!file) return alert("Вы не выбрали изображение")
         if (categoryText ===  "Категория") return  alert("Вы не выбрали категорию")
-        if (nameInput.current.value == "" || descriptionInput.current.value == "" || prise=="") return alert("Введите все данные о товаре")
+        if (nameInput.current.value === "" || descriptionInput.current.value === "" || prise === "") return alert("Введите все данные о товаре")
         const formData = new FormData()
         formData.append('name', nameInput.current.value);
         formData.append('description', descriptionInput.current.value);

@@ -10,6 +10,7 @@ import Main from "../components/main/main"
 import { setUser } from "../store/slices/userSlice"
 import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom"
+import defaultImage from "../defaultUser.jpg"
 
 export const Profile = () => {
     const { isAuth, nickname, image, id, role } = useAuth()
@@ -19,11 +20,14 @@ export const Profile = () => {
     const [rename, setRename] = useState(false)
     const [oferHistory, setOferHistory] = useState(false)
     const [oferState, setOferState] = useState()
+    const [userImage, setUserImage] = useState()
     const [nicknameState, setNicknameState] = useState("")
 
     const [color1, setColor1] = useState("black")
     const [color2, setColor2] = useState("black")
+
     const inputRef = useRef()
+    const photo = useRef()
 
 
     useEffect(() => {
@@ -94,6 +98,37 @@ export const Profile = () => {
             });
     }
 
+    const selectFiles = async e => {
+        const newFile = e.target.files[0]; 
+        
+        // if (inputRef.current.value) photo.current.classList.toggle(styles.photo__active);
+        if (newFile) {     
+            const formData = new FormData()
+            formData.append('userId', id);
+            formData.append('userImage', image);
+            formData.append('image', newFile);
+
+            await fetch(`${process.env.REACT_APP_SERVER}/api/user/reimage`, {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                return response.json()
+            }).then((data) => {
+                if (data) {
+                    dispatch(setUser({
+                        token: Cookies.get('token'),
+                        image: data.image,
+                        nickname,
+                        id,
+                        role
+                    }))
+                }
+            }).catch((e) => {
+                alert(e)
+            });
+        }
+    }
+
     return (
         <Layout>
             <Header user={true} />
@@ -103,7 +138,10 @@ export const Profile = () => {
                         <div className={styles.user}>
                             <div className={styles.backgroud} style={{ background: `linear-gradient(172deg, ${color1} 0%, ${color2} 100%)` }}></div>
                             <div className={styles.user__img} style={role === "admin" ? { border: `10px ${color1} solid` } : { border: "10px white solid" }}>
-                                <img src={image} alt="Юзер никнейм" />
+                                <input onChange={selectFiles} type="file" id="imageUSer" />
+                                <label htmlFor="imageUSer">
+                                    <img src={image?image:defaultImage} alt="Юзер никнейм" />
+                                </label>
                             </div>
                             <div className={styles.profile__text}>
                                 <div className={styles.user__information}>
@@ -143,14 +181,14 @@ export const Profile = () => {
                                             </div>
                                             <div className={styles.ofer__product}>
                                                 {e.oferproducts.map((e, i) =>
-                                                    <img key={i} onClick={() => navigate(`/product/${e.product.id}`)} src={e.product.image} alt={e.product.name} />
+                                                    <img key={i} onClick={() => navigate(`/product/${e.product.id}`)} src={e.product?.image} alt={e.product?.name} />
                                                 )}
                                             </div>
                                         </div>
                                     )}
                                 </div>
                                 {!oferState && (
-                                    <p style={{textAlign: "center"}}>Заказов нет</p>
+                                    <p style={{ textAlign: "center" }}>Заказов нет</p>
                                 )}
                             </div>
                         )}

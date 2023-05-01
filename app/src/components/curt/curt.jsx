@@ -18,11 +18,12 @@ export const Curt = ({ open, onToggle }) => {
     const emailInput = useRef()
 
     const { isAuth, id } = useAuth()
-    const { curt } = useCurt()
+    const { curt, priseCurt } = useCurt()
     const dispatch = useDispatch()
 
     const [loader, setLoader] = useState(true)
     const [ofer, setOfer] = useState(false)
+
 
     useEffect(() => {
         if (isAuth) {
@@ -42,7 +43,8 @@ export const Curt = ({ open, onToggle }) => {
                         setLoader(false)
                         if (data.curtProducts.length !== 0) {
                             dispatch(setCurt({
-                                curt: data.curtProducts
+                                curt: data.curtProducts,
+                                priseCurt: priseCurt
                             }))
                         }
                     }).catch((e) => {
@@ -72,34 +74,35 @@ export const Curt = ({ open, onToggle }) => {
         e.preventDefault()
 
         await fetch(`${process.env.REACT_APP_SERVER}/api/ofer`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        userId: id,
-                        product: curt,
-                        name: nameInput.current.value,
-                        address: addressInput.current.value,
-                        email: emailInput.current.value,
-                        phone: phoneInput.current.value
-                    })
-                })
-                    .then(response => {
-                        return response.json()
-                    }).then((data) => {
-                        if (data.message) {
-                            alert(data.message);
-                            setOfer(false)
-                            dispatch(removeCurt())
-                        }
-                    }).catch((e) => {
-                        console.log(e);
-                    });
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: id,
+                product: curt,
+                name: nameInput.current.value,
+                address: addressInput.current.value,
+                email: emailInput.current.value,
+                phone: phoneInput.current.value
+            })
+        })
+            .then(response => {
+                return response.json()
+            }).then((data) => {
+                if (data.message) {
+                    alert(data.message);
+                    setOfer(false)
+                    dispatch(removeCurt())
+                }
+            }).catch((e) => {
+                console.log(e);
+            });
     }
 
     return (
         <div ref={curtBlock} className={styles.curt}>
+            <p onClick={() => onToggle(false)} className={styles.close}>X</p>
             {isAuth ? (
                 !ofer ? (
                     <div ref={curtDiv} className={styles.curt__block}>
@@ -115,17 +118,17 @@ export const Curt = ({ open, onToggle }) => {
                             }
                         </div>
                         {loader && <Loader />}
-                        <button  data-curt onClick={() => setOfer(true)}>Перейти к оформлению</button>
+                        <button data-curt onClick={() => setOfer(true)}>Перейти к оформлению</button>
                     </div>
                 ) : (
                     <div className={styles.ofer__block}>
                         <h3>Оформаление заказа</h3>
                         <p data-curt onClick={() => setOfer(false)}>⬅️Вернуться к корзине</p>
                         <form onSubmit={oferCheck}>
-                            <input ref={nameInput} type="text" placeholder="Имя" required/>
-                            <input ref={addressInput} type="text" placeholder="Адрес" required/>
-                            <InputMask ref={phoneInput} mask="+7\ 999  999  99  99" placeholder="Телефон" required/>
-                            <input ref={emailInput} type="email" placeholder="Почта" required/>
+                            <input ref={nameInput} type="text" placeholder="Имя" required />
+                            <input ref={addressInput} type="text" placeholder="Адрес" required />
+                            <InputMask ref={phoneInput} mask="+7\ 999  999  99  99" placeholder="Телефон" required />
+                            <input ref={emailInput} type="email" placeholder="Почта" required />
                             <p>Оплата</p>
                             <div className={styles.checkbox}>
                                 <input id="receiving" name="checkbox" type="radio" />
@@ -137,7 +140,7 @@ export const Curt = ({ open, onToggle }) => {
                                 <input id="online" name="checkbox" type="radio" />
                                 <label htmlFor="online">Онлайн</label>
                             </div>
-                            <button data-curt >Оформить заказ</button>
+                            <button data-curt >Оформить заказ {priseCurt} ₽</button>
                         </form>
                     </div>
                 )

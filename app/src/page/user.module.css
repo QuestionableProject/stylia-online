@@ -73,6 +73,7 @@
 .login {
     display: grid;
     place-items: center;
+    padding: 50px;
     border-radius: 30px;
     background: white;
     width: 50%;
@@ -90,6 +91,12 @@
     transform: translate(-50%, -50%);
     width: 170px; height: 170px;
     border-radius: 50%;
+}
+.user__img label {
+    cursor: pointer;
+}
+.user__img input {
+    display: none;
 }
 .user__img img {
     object-fit: cover;
@@ -162,13 +169,31 @@
     transition: transform .25s;
 }
 
-.favorite {
-    box-shadow: 0px 5px 5px 0px rgb(0, 0, 0, .2);
-    width: 100%;
-    height: 500px;
-    border-radius: 30px;
-    padding: 50px;
+
+@media screen and (max-width: 900px) {
+    .user {
+        width: 100%;
+        height: 500px;
+    }
+    .profile {
+        flex-direction: column;
+        height: auto;
+    }
+    .ofer__block {
+        height: 500px;
+    }
+    .nickname__input input {
+        text-transform: none;
+        font-size: 40px;
+        width: 100%;
+    }
 }
-.favorite h2 {
-    text-align: center;
+@media screen and (max-width: 500px) {
+    .profile__text {
+        display: flex;
+        flex-direction: column;
+    }
+    .login {
+        padding: 10px;
+    }
 }

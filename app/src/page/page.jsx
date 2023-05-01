@@ -103,6 +103,7 @@ export const Page = () => {
             {newProduct?.map((e, i) =>
               i !== 1 ? (
                 <Tween
+                  key={e.id}
                   from={{
                     x: '-1200',
                     rotation: 0
@@ -118,6 +119,7 @@ export const Page = () => {
                 </Tween>
               ) : (
                 <Tween
+                  key={e.id}
                   from={{
                     x: '1200',
                     rotation: 0

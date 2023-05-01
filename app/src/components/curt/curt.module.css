@@ -8,6 +8,19 @@
     top: 0;
     z-index: 999;
     text-transform: uppercase;
+    overflow-y: scroll;
+}
+.curt::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.close {
+    position: absolute;
+    font-size: 30px;
+    top: 10px;
+    right: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
 .curt__block {
     display: flex;
@@ -47,6 +60,7 @@
 }
 .checkbox {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 10px;
 }
@@ -75,4 +89,10 @@
 }
 .ofer__block p {
     cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .curt {
+        padding: 50px 20px;
+    }
 }

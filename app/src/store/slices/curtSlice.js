@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    curt: null
+    curt: null,
+    priseCurt: null
 };
 
 const curtSlice = createSlice({
@@ -10,9 +11,11 @@ const curtSlice = createSlice({
     reducers: {
         setCurt(state, action) {
             state.curt = action.payload.curt
+            state.priseCurt = action.payload.priseCurt
         },
         removeCurt(state) {
             state.curt = null
+            state.priseCurt = null
         }
     }
 })

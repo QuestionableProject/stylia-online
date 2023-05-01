@@ -26,7 +26,11 @@ export const Contact = () => {
     }, [])
 
     const enable = (e) => {
-        document.querySelector(`[data-address=${e}]`).style.opacity = ".5"
+        document.querySelectorAll(`[data-address]`).forEach(e => {
+            e.style.opacity = ".5"
+        })
+
+        document.querySelector(`[data-address=${e}]`).style.opacity = "1"
     }
 
     return (
@@ -45,7 +49,7 @@ export const Contact = () => {
                         )}
                     </div>
                     <YMaps>
-                        <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} width={"100%"} height={"100%"}>
+                        <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} className={styles.map__block}>
                             <ZoomControl />
                             {addressState?.map((e ,i)=> 
                                 <Placemark key={i} onClick={() => enable(`address${i}`)} geometry={e.map}/>

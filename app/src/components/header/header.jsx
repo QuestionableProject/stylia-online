@@ -11,11 +11,15 @@ import { useAuth } from "../../hooks/use-auth"
 import { useDispatch } from "react-redux"
 import { removeUser } from "../../store/slices/userSlice"
 import Cookies from "js-cookie"
+import Hamburger from "../hamburger/hamburger"
 
 export const Header = ({ classStyle, user }) => {
     const navigate = useNavigate();
+
     const [modalOpenLogin, setModalOpenLogin] = useState(false)
     const [modalOpenCurt, setModalOpenCurt] = useState(false)
+    const [hamburger, setHamburger] = useState(false)
+
     const { isAuth } = useAuth()
 
     const dispatch = useDispatch()
@@ -27,7 +31,7 @@ export const Header = ({ classStyle, user }) => {
                     <Login open={modalOpenLogin} onToggle={setModalOpenLogin} />
                 </Portal>
             )}
-            {(modalOpenLogin || modalOpenCurt) && (
+            {(modalOpenLogin || modalOpenCurt || hamburger) && (
                 <Portal selector="#modal">
                     <Background />
                 </Portal>
@@ -35,6 +39,17 @@ export const Header = ({ classStyle, user }) => {
             {modalOpenCurt && (
                 <Portal selector="#modal">
                     <Curt open={modalOpenCurt} onToggle={setModalOpenCurt} />
+                </Portal>
+            )}
+            {hamburger && (
+                <Portal selector="#modal">
+                    <Hamburger
+                        open={hamburger}
+                        onToggle={setHamburger}
+                        user={user}
+                        onToggleLogin={setModalOpenLogin}
+                        onToggleCurt={setModalOpenCurt}
+                    />
                 </Portal>
             )}
             <div className={styles.logo}>
@@ -49,18 +64,21 @@ export const Header = ({ classStyle, user }) => {
             </ul>
             <ul style={{ marginLeft: "auto" }}>
                 {isAuth
-                    ? user ? <li 
-                    onClick={
-                        () =>{ 
-                            dispatch(removeUser());
-                            Cookies.set("token", "");
-                        }
-                    }>Выйти</li> : <li onClick={() => navigate("/profile")} data-login>Профиль</li>
+                    ? user ? <li
+                        onClick={
+                            () => {
+                                dispatch(removeUser());
+                                Cookies.set("token", "");
+                            }
+                        }>Выйти</li> : <li onClick={() => navigate("/profile")} data-login>Профиль</li>
                     : <li onClick={() => setModalOpenLogin(true)} data-login>Войти</li>
                 }
                 <li onClick={() => setModalOpenCurt(true)} data-curt>Корзина</li>
             </ul>
-            <HamburgerIcon color={classStyle ? null : "--back-color"} style={styles.hamburgericon} />
+            <HamburgerIcon
+                open={hamburger}
+                onToggle={setHamburger}
+                color={classStyle ? null : "--back-color"} style={styles.hamburgericon} />
         </header>
     )
 }

@@ -85,16 +85,12 @@ export const Catalogue = () => {
 
             <Main>
                 <div className={styles.catalogue}>
-                    <div className={styles.category}>
-                        <dl>
-                            <dt onClick={() => categoryFilter("Все товары")} className={styles.category__name}>Все товары</dt>
-                        </dl>
+                    <ul className={styles.category}>
+                        <li onClick={() => categoryFilter("Все товары")} className={styles.category__name}>Все товары</li>
                         {categoryState?.map((e) =>
-                            <dl key={e.id}>
-                                <dt onClick={() => categoryFilter(e.name)} className={styles.category__name}>{e.name}</dt>
-                            </dl>
+                            <li  key={e.id} onClick={() => categoryFilter(e.name)} className={styles.category__name}>{e.name}</li>
                         )}
-                    </div>
+                    </ul>
                     <div className={styles.catalogue__block}>
                         <ul className={styles.catalogue__filter}>
                             <li onClick={() => buyCount()}>По популярности</li>

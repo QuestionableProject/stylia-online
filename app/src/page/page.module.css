@@ -16,7 +16,7 @@
     backdrop-filter: blur(2px);
     height: 100%;
     padding: 0 50px;
-    background: rgb(0,0,0,0.2);
+    background: rgb(0, 0, 0, 0.2);
 }
 
 .header {
@@ -26,96 +26,102 @@
     border-bottom: 1px solid white;
     justify-items: center;
     animation: previewText 3s;
-    color: white; 
+    color: white;
     animation: previewText 3s;
     text-align: center;
 }
+
 .logo {
     margin-right: auto;
     gap: 20px;
     display: flex;
     align-items: center;
 }
+
 .logo p {
     animation: logoAnimation 1s;
 }
+
 .header ul {
     display: flex;
     gap: 20px;
 }
+
 .link__catalog {
     font-size: 30px;
 }
-.header ul li, .link__catalog {
+
+.header ul li,
+.link__catalog {
     position: relative;
     cursor: pointer;
 }
-.header ul li:hover::before, .link__catalog:hover::before {
+
+.header ul li:hover::before,
+.link__catalog:hover::before {
     transform: scaleX(1);
     transition: transform 1s;
 }
-.header ul li::before , .link__catalog::before{
+
+.header ul li::before,
+.link__catalog::before {
     content: '';
     width: 100%;
     height: 1px;
     background: white;
     position: absolute;
-    left: 0; bottom: -5px;
+    left: 0;
+    bottom: -5px;
     transform: scaleX(0);
     transition: transform .25s;
 }
-@media screen and (max-width: 900px) {
-    .header {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-    }
-    .hamburgericon {
-        display: block;
-        
-    }
-    .header ul {
-        display: none;
-    }
-}
-@media screen and (max-width: 400px) {
-    .header {
-        align-items: center;
-        flex-direction: column;
-    }
-}
+
 /* Тело страницы */
 
 .main {
-    padding-bottom: 100px ;
-    display:  flex;
+    padding-bottom: 100px;
+    display: flex;
     align-items: flex-end;
     justify-content: space-between;
     flex: 1;
     animation: previewText 3s;
 }
 
-.preview__text p:nth-child(1){
+.preview__text p:nth-child(1) {
     font-size: 30px;
     white-space: nowrap;
 }
-.preview__text p:nth-child(2){
+
+.preview__text p:nth-child(2) {
     text-align: justify;
     width: 100%;
 }
+
 @keyframes logoAnimation {
-    0% { transform: translateX(-50px);}
-    100% { transform: translateX(0);}
+    0% {
+        transform: translateX(-50px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
+
 @keyframes previewText {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* О нас */
 .aboutme {
-    height: 700px; 
+    height: 700px;
 }
+
 .aboutme__text {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -123,18 +129,22 @@
     justify-items: center;
     height: 100%;
 }
+
 .aboutme__heading {
     text-align: center;
 }
+
 .aboutme__heading p:nth-child(1) {
     margin-bottom: 50px;
     font-size: 50px;
     font-weight: 600;
 }
+
 .aboutme__description {
     padding: 50px;
     text-align: justify;
 }
+
 .aboutme__description p:nth-child(2) {
     cursor: pointer;
     text-decoration: underline;
@@ -149,53 +159,111 @@
     position: relative;
     margin: 0 -50px;
 }
+
 .newproduct__img {
     position: absolute;
     background: white;
     cursor: pointer;
 }
+
 .newproduct__img img {
     transition: all 1s;
 }
+
 .newproduct__img img:hover {
-    transform:scale(1.1);
+    transform: scale(1.1);
 }
 
 /* Рекомендуемые продукты */
 .product {
     padding: 0 50px;
 }
+
 .product h3 {
     font-size: 40px;
     padding-bottom: 50px;
     font-weight: 600;
 }
+
 .learnmore {
     display: flex;
     justify-content: right;
     margin-top: 50px;
 }
+
 .learnmore p {
     font-size: 20px;
     font-weight: 600;
     position: relative;
     cursor: pointer;
 }
+
 .learnmore p:hover::before {
     transform: scaleX(1);
     transition: transform 1s;
 }
+
 .learnmore p::before {
     content: '';
     width: 100%;
     height: 1px;
     background: var(--back-color);
     position: absolute;
-    left: 0; bottom: -5px;
+    left: 0;
+    bottom: -5px;
     transform: scaleX(0);
     transition: transform .25s;
 }
+
 .card__list {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 900px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .hamburgericon {
+        display: block;
+
+    }
+
+    .header ul {
+        display: none;
+    }
+
+    .main {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 50px;
+        text-align: center;
+    }
+
+    .preview__text {
+        display: none;
+    }
+
+    .aboutme__text {
+        grid-template-columns: 1fr;
+    }
+
+    .aboutme {
+        height: auto;
+    }
+    .card__list {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header {
+        align-items: center;
+        flex-direction: column;
+    }
 }

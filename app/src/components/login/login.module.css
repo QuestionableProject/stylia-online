@@ -85,3 +85,19 @@
 
     100% {transform: translateX(0px);}
 }
+@media screen and (max-width: 900px) {
+    .login__block {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .login__block {
+        width: auto;
+    }
+}
+@media screen and (max-width: 350px) {
+    .login__block {
+        padding: 20px;
+    }
+}

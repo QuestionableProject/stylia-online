@@ -26,17 +26,18 @@ export default function OferFormCard({ data, Array }) {
         <div className={styles.OferCard}>
             <div className={styles.text}>
                 <p>id: {data.id}</p>
+                <p>Дата оформления: {data.createdAt.slice(0, 16).replace(['T'], " Время: ")}</p>
                 <p>Имя: {data.name}</p>
                 <p>Адрес: {data.address}</p>
                 <p>Телефон: {data.phone}</p>
                 <p>Почта: {data.email}</p>
             </div>
             <div className={styles.product}>
-                {data.oferproducts.map(e =>
-                    <div key={e.product.id} className={styles.product__card}>
-                        <img src={e.product.image} alt={e.product.name} />
-                        <p>id: {e.product.id}</p>
-                        <p>Имя: {e.product.name}</p>
+                {data.oferproducts.map((e,i) =>
+                    <div key={i} className={styles.product__card}>
+                        <img src={e.product?.image} alt={e.product?.name} />
+                        <p>id: {e.product?.id}</p>
+                        <p>Имя: {e.product?.name}</p>
                     </div>
                 )}
             </div>
