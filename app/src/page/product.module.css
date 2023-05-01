@@ -80,4 +80,15 @@
     margin: 0 5px;
 }
 
-
+@media screen and (max-width: 900px) {
+    .product__card {
+        flex-direction: column;
+    }
+    .information {
+        width: 100%;
+        gap: 20px;
+    }
+    .img {
+        width: auto;
+    }
+}

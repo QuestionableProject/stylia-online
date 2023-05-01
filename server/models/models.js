@@ -35,16 +35,6 @@ const ProductsDescriptionCharacter = sequelize.define('productsDescriptionCharac
     createdAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') },
     updatedAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') }
 })
-const Favorite = sequelize.define('favorite', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    createdAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') },
-    updatedAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') }
-})
-const FavoriteProduct = sequelize.define('favoriteProduct', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    createdAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') },
-    updatedAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') }
-})
 const Curt = sequelize.define('curt', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     createdAt: { type: DataTypes.DATE, defaultValue: sequelize.literal('NOW()') },
@@ -102,16 +92,6 @@ CurtProduct.belongsTo(Curt)
 Products.hasOne(CurtProduct)
 CurtProduct.belongsTo(Products)
 
-// Избранное
-User.hasOne(Favorite)
-Favorite.belongsTo(User)
-
-Favorite.hasMany(FavoriteProduct)
-FavoriteProduct.belongsTo(Favorite)
-
-Products.hasOne(FavoriteProduct)
-FavoriteProduct.belongsTo(Products)
-
 // Описание
 Products.hasOne(ProductsDescription)
 ProductsDescription.belongsTo(Products)
@@ -129,19 +109,9 @@ OferProduct.belongsTo(Ofer)
 Products.hasOne(OferProduct)
 OferProduct.belongsTo(Products)
 
-// User.sync({ alter: true }).then(() => {"База переопределена"})
-// Products.sync({ alter: true }).then(() => {"База переопределена"})
-// ProductsDescription.sync({ alter: true }).then(() => {"База переопределена"})
-// ProductsDescriptionCharacter.sync({ alter: true }).then(() => {"База переопределена"})
-// Favorite.sync({ alter: true }).then(() => {"База переопределена"})
-// FavoriteProduct.sync({ alter: true }).then(() => {"База переопределена"})
-// OferProduct.sync({ alter: true }).then(() => {"База переопределена"})
-// Ofer.sync({ alter: true }).then(() => {"База переопределена"})
-
 module.exports = {
     User, Products, 
     ProductsDescription, ProductsDescriptionCharacter, 
-    Favorite, FavoriteProduct, 
     Curt, CurtProduct, 
     Subscribe, Address, 
     ProductCategory ,
