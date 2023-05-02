@@ -61,7 +61,6 @@ class OferController {
     }
     async editOfer(req,res) {
         const {oferId, active} = req.body
-        console.log(oferId, active);
         const ofers = await Ofer.findOne({
             where: {id: oferId}
         })
