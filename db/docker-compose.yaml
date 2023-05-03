@@ -5,7 +5,6 @@ services:
     container_name: db_styliaOnline
     ports:
       - "5438:5432"
-    restart: always
     environment:
       - POSTGRES_DB=db_styliaOnline
       - POSTGRES_PASSWORD=i5fz%4Nz&o*b#1Ep
