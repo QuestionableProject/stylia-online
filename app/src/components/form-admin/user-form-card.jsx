@@ -48,7 +48,7 @@ export const UserFormCard = ({ data, Array }) => {
     return (
         <div className={styles.usercard}>
             <div className={styles.username}>
-                <p>Дата регистрации: {data.createdAt.slice(0, 16).replace(['T'], " Время: ")}</p>
+                <p>Дата регистрации: {data.createdAt?.slice(0, 16).replace(['T'], " Время: ")}</p>
                 <p>{data.id}</p>
                 <p><b>Логин:</b> {data.login}</p>
                 <p><b>Роль:</b> {data.role}</p>

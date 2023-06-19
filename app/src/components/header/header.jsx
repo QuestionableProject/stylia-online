@@ -46,7 +46,7 @@ export const Header = ({ classStyle, user }) => {
                     <Hamburger
                         open={hamburger}
                         onToggle={setHamburger}
-                        user={user}
+                        О={user}
                         onToggleLogin={setModalOpenLogin}
                         onToggleCurt={setModalOpenCurt}
                     />

@@ -100,8 +100,6 @@ export const Profile = () => {
 
     const selectFiles = async e => {
         const newFile = e.target.files[0]; 
-        
-        // if (inputRef.current.value) photo.current.classList.toggle(styles.photo__active);
         if (newFile) {     
             const formData = new FormData()
             formData.append('userId', id);
@@ -197,7 +195,7 @@ export const Profile = () => {
                 ) : (
                     <div className={styles.profile}>
                         <div className={styles.login}>
-                            <p className="">Войдите в аккаунт, чтобы совершать покупки</p>
+                            <p>Войдите в аккаунт, чтобы совершать покупки</p>
                         </div>
                     </div>
                 )}

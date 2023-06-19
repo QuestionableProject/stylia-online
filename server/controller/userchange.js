@@ -40,7 +40,8 @@ class UserChangeController {
             attributes: [
                 "login",
                 "role",
-                "id"
+                "id",
+                "createdAt"
             ],
         })
         return res.json(UserGet)

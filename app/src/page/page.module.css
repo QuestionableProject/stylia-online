@@ -164,10 +164,15 @@
     position: absolute;
     background: white;
     cursor: pointer;
+    width: 320px;
+    height: 260px;
 }
 
 .newproduct__img img {
     transition: all 1s;
+    width: 320px;
+    height: 260px;
+    object-fit: cover;
 }
 
 .newproduct__img img:hover {
