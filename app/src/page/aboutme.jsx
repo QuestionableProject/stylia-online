@@ -17,7 +17,7 @@ export const Aboutme = () => {
                             <h3>Наша история:</h3>
                             <p> Мы также придаем большое значение стремительности нашей работы. Наш сайт обеспечивает быстрый и удобный доступ к нашим товарам, а наша команда профессионалов готова оперативно реагировать на запросы и вопросы клиентов. Мы стремимся к тому, чтобы каждый клиент получил свой заказ в кратчайшие сроки и в полной сохранности.</p>
                         </div>
-                        <img src="https://davitamebel.ru/upload/resize_cache/product/841_631_1/b098839d-ed41-11ec-83b1-00155db6cc01_im-00001651_alyaska%205/photo_00_im-00001651_alyaska%205nabor%20mebeli%20dlya%20detskoy.jpg?1668661055" alt="" />
+                        <img src="https://doka-master.ru/wp-content/uploads/2018/09/image7-36.jpeg" alt="" />
                     </section>
                     <section className={styles.purpose}>
                         <img src={aboutme} alt="" />

@@ -18,10 +18,12 @@ class Productcontroller {
         const categorys = await ProductCategory.findAll()
         return res.json(categorys)
     }
+
     async getAll(req,res) {
         const CheckProduct = await Products.findAll()
         return res.json(CheckProduct)
     }
+    
     async getOne(req,res) {
         const {id} = req.params 
         const product = await Products.findOne({
